@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+
+  
+
+<div class="slider">
+  <div class="slide slide1">
+    <img src="IMG_0541.jpg">
+  </div>
+  <div class="slide slide2">
+    <img src="IMG_0542.jpg">
+  </div>
+  <div class="slide slide3">
+    <img src="IMG_0543.jpg">
+  </div>
+
+  <div class="slide slide4">
+    <img src="IMG_0544.jpg">
+  </div>
+
+  <div class="navigation">
+    <button class="prev">>></button>
+    <button class="next"><<</button>
+  </div>
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
+
+<style>
+body {
+background-color: red;
+width: 100%;
+height: 100%;
+}
+
+.slider {
+  position: relative;
+  width: 600px;
+  height: 1100px;
+  margin: 40px auto;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  /*object-fit: cover;*/
+}
+
+.slide1 {
+  background-image: url('IMG_0541.jpg');
+  background-size: cover;
+}
+
+.slide2 {
+  background-image: url('IMG_0542.jpg');
+  background-size: cover;
+}
+
+.slide3 {
+  background-image: url('IMG_0543.jpg');
+  background-size: cover;
+}
+
+
+.slide3 {
+  background-image: url('IMG_0544.jpg');
+  background-size: cover;
+}
+
+.active {
+  opacity: 1;
+}
+
+.navigation {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/*
+.prev, .next {
+  background-color: green;
+  color: #333;
+  border: none;
+width: 40px;
+
+  padding: 0px 350px;
+  font-size: 16px;
+  cursor: pointer;
+margin-top: -400px;
+
+font-weight: bold;
+}*/
+
+.prev:hover, .next:hover {
+  background-color: none;
+  color: #fff;
+}
+
+.dots {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.dot.active {
+  background-color: #333;
+}
+
+
+
+.dot:hover {
+  background-color: #333;
+}
+
+/* Add animations for slide transitions */
+.slide {
+  animation: fade 1s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Add styles for navigation buttons */
+.prev, .next {
+  position: absolute;
+ 
+  transform: translateY(-50%);
+  font-size: 70px;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+border-radius: 50px;
+line-height: 5rem;
+margin-left: 250px;
+ margin-right: 250px;
+  cursor: pointer;
+margin-top: -600px;
+
+font-weight: bold;
+
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+
+</style>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+const dots = document.querySelectorAll('.dot');
+
+let currentSlide = 0;
+
+// Function to show the current slide
+function showSlide() {
+  slides.forEach((slide, index) => {
+    slide.classList.remove('active');
+    if (index === currentSlide) {
+      slide.classList.add('active');
+    }
+  });
+  dots.forEach((dot, index) => {
+    dot.classList.remove('active');
+    if (index === currentSlide) {
+      dot.classList.add('active');
+    }
+  });
+}
+
+// Function to handle previous button click
+function prevSlide() {
+  currentSlide--;
+  if (currentSlide < 0) {
+    currentSlide = slides.length - 1;
+  }
+  showSlide();
+}
+
+// Function to handle next button click
+function nextSlide() {
+  currentSlide++;
+  if (currentSlide >= slides.length) {
+    currentSlide = 0;
+  }
+  showSlide();
+}
+
+// Add event listeners to buttons
+prevButton.addEventListener('click', prevSlide);
+nextButton.addEventListener('click', nextSlide);
+
+// Add event listeners to dots
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    currentSlide = index;
+    showSlide();
+  });
+});
+
+// Show the first slide
+showSlide();
+</script>
+
+</body>
+</html>
